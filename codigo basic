@@ -1,0 +1,47 @@
+from gpiozero import MCP3008, DigitalInputDevice, Buzzer
+import time
+import sys
+
+ANALOGICO =4
+DIGITAL = 25
+BUZZER = 19
+ 
+
+def main():
+    try:
+
+       Detector = MCP3008(channel=ANALOGICO)
+       
+        Dig = DigitalInputDevice(DIGITAL)
+       
+        ZZ = Buzzer(BUZZER)
+         
+        while True:
+           
+            analogico_1 = Detector.value
+            digital_1 = Dig.value
+       
+
+       
+        print(" el valor analogico:",analogico_1)
+        print(" el valor digital:",digital_1)
+       
+       
+       
+        if digital_1 == 0:
+            ZZ.on()
+       
+        else:
+            ZZ.off()
+           
+           
+        time.sleep(1)
+       
+    except KeyboardInterrupt:
+        pass
+    finally:
+        ZZ.off()
+         
+
+if __name__ == "__main__":
+    main()
